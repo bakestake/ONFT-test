@@ -66,37 +66,42 @@ Check `constants/onftArgs.json` for the specific test configuration used in this
 1. Deploy two contracts:
 ```angular2html
  npx hardhat --network bsc-testnet deploy --tags ExampleUniversalONFT721
- npx hardhat --network fuji deploy --tags ExampleUniversalONFT721
+ npx hardhat --network goerli deploy --tags ExampleUniversalONFT721
 ```
 2. Set the "trusted remotes", so each contract can send & receive messages from one another, and `only` one another.
 ```angular2html
-npx hardhat --network bsc-testnet setTrustedRemote --target-network fuji --contract ExampleUniversalONFT721
-npx hardhat --network fuji setTrustedRemote --target-network bsc-testnet --contract ExampleUniversalONFT721
+npx hardhat --network bsc-testnet setTrustedRemote --target-network goerli --contract ExampleUniversalONFT721
+npx hardhat --network goerli setTrustedRemote --target-network bsc-testnet --contract ExampleUniversalONFT721
 ```
 3. Set the min gas required on the destination
 ```angular2html
 npx hardhat --network bsc-testnet setMinDstGas --target-network fuji --contract ExampleUniversalONFT721 --packet-type 1 --min-gas 100000
 npx hardhat --network fuji setMinDstGas --target-network bsc-testnet --contract ExampleUniversalONFT721 --packet-type 1 --min-gas 100000
 ```
-4. Mint an NFT on each chain!
+4. Set Base URI on each chain
+```angular2html
+npx hardhat --network bsc-testnet setBaseURI --contract ExampleUniversalONFT721
+npx hardhat --network goerli setBaseURI --contract ExampleUniversalONFT721
+```
+5. Mint an NFT on each chain!
 ```angular2html
 npx hardhat --network bsc-testnet onftMint --contract ExampleUniversalONFT721
-npx hardhat --network fuji onftMint --contract ExampleUniversalONFT721
+npx hardhat --network goerli onftMint --contract ExampleUniversalONFT721
 ```
-5. [Optional] Show the token owner(s)
+6. [Optional] Show the token owner(s)
 ```angular2html
 npx hardhat --network bsc-testnet ownerOf --token-id 1 --contract ExampleUniversalONFT721
-npx hardhat --network fuji ownerOf --token-id 11 --contract ExampleUniversalONFT721
+npx hardhat --network goerli ownerOf --token-id 3 --contract ExampleUniversalONFT721
 ```
-6. Send ONFT across chains
+7. Send ONFT across chains
 ```angular2html
-npx hardhat --network bsc-testnet onftSend --target-network fuji --token-id 1 --contract ExampleUniversalONFT721
-npx hardhat --network fuji onftSend --target-network bsc-testnet --token-id 11 --contract ExampleUniversalONFT721 
+npx hardhat --network bsc-testnet onftSend --target-network goerli --token-id 1 --contract ExampleUniversalONFT721
+npx hardhat --network goerli onftSend --target-network bsc-testnet --token-id 3 --contract ExampleUniversalONFT721 
 ```
-7. Verify your token no longer exists in your wallet on the source chain & wait for it to reach the destination side.
+8. Verify your token no longer exists in your wallet on the source chain & wait for it to reach the destination side.
 ```angular2html
 npx hardhat --network bsc-testnet ownerOf --token-id 1 --contract ExampleUniversalONFT721
-npx hardhat --network fuji ownerOf --token-id 1 --contract ExampleUniversalONFT721
+npx hardhat --network goerli ownerOf --token-id 1 --contract ExampleUniversalONFT721
 ```
 
 
