@@ -195,3 +195,8 @@ task("isStoredPayload", "check if stored payload", require("./isStoredPayload"))
     .addParam("desAddress", "")
     .addOptionalParam("payload", "")
     .addOptionalParam("clear", "", false, types.boolean)
+
+//
+
+task("setBaseURI", "setting base URI for the contract", require("./setBaseURI"))
+    .addParam("contract", "name of the contract")
